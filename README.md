@@ -15,15 +15,14 @@
 
 ## Revisions
 
-There are 2 version of Zigbee LAN Gateway,what are tested:
+There are 3 version of Zigbee LAN Gateway,what are tested:
 
-- [RF-STAR RF-BM-2652P2](https://github.com/mercenaruss/zigstar_gateways/raw/main/files/Gerbers/Gerber_WT32_RF-BM-2652P2.zip)
-- [Ebyte E72-2G4M05S1F](https://github.com/mercenaruss/zigstar_gateways/raw/main/files/Gerbers/Gerber_WT32_E72-2G4M05S1F.zip)
+- [RF-STAR RF-BM-2652P2](https://github.com/mercenaruss/zigstar_gateways/raw/main/files/Gerbers/Gerber_WT32_RF-BM-2652P2.zip) (+20dbm)
+- [Ebyte E72-2G4M20S1E](https://github.com/mercenaruss/zigstar_gateways/raw/main/files/Gerbers/Gerber_WT32_E72-2G4M20S1E.zip) (+20dbm)
+- [Ebyte E72-2G4M05S1F](https://github.com/mercenaruss/zigstar_gateways/raw/main/files/Gerbers/Gerber_WT32_E72-2G4M05S1F.zip) (+5dbm)
 
 ## Development
 
-<b> -More zigbee modules to come(Ebyte,Silabs,etc) </b><br>
-<b> -Need specific zigbee module? Let me know [HERE](https://zig-star.com/about/#contact) </b><br>
 <b> -Have in mind any improvement? Let me know [HERE](https://zig-star.com/about/#contact) </b>
 
 For all documentation,description and instructions visit: [ZIG-STAR.COM](https://zig-star.com)
