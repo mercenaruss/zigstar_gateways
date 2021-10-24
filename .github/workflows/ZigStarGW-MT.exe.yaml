@@ -6,13 +6,13 @@ jobs:
     - name: Checkout repo
       id: checkout
       uses: actions/checkout@v2
-    - name: Update .exe file
+    - name: Update x64.exe file
       id: update_x64exe_file
       uses: TheLastProject/keep-remote-file-locally-up-to-date-action@v1
       with:
         url: https://github.com/xyzroe/ZigStarGW-MT/releases/latest/ZigStarGW-MT-x64.exe.zip
         file_in_repo: files/Tools/ZigStarGW-MT-x64.exe.zip
-    - name: Update .exe file
+    - name: Update x32.exe file
       id: update_x32exe_file
       uses: TheLastProject/keep-remote-file-locally-up-to-date-action@v1
       with:
