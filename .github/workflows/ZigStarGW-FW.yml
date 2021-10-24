@@ -13,7 +13,7 @@ jobs:
         url: https://github.com/xyzroe/ZigStarGW-FW/releases/latest/download/ZigStarGW_v0.5.9.bin
         file_in_repo: files/Firmware/ZigStarGW_v0.5.9.bin
     - name: Update firmware full file
-      id: update_firmware_full file
+      id: update_firmware_full_file
       uses: TheLastProject/keep-remote-file-locally-up-to-date-action@v1
       with:
         url: https://github.com/xyzroe/ZigStarGW-FW/releases/latest/download/ZigStarGW_v0.5.9.full.bin
