@@ -1,0 +1,24 @@
+jobs:
+  keep_file_updated:
+    runs-on: ubuntu-latest
+    name: Keep file updated
+    steps:
+    - name: Checkout repo
+      id: checkout
+      uses: actions/checkout@v2
+    - name: Update firmware file
+      id: update_firmware_file
+      uses: TheLastProject/keep-remote-file-locally-up-to-date-action@v1
+      with:
+        url: https://github.com/xyzroe/ZigStarGW-FW/releases/latest/download/ZigStarGW_v0.5.9.bin
+        file_in_repo: files/Firmware/ZigStarGW_v0.5.9.bin
+    - name: Update firmware full file
+      id: update_firmware_full file
+      uses: TheLastProject/keep-remote-file-locally-up-to-date-action@v1
+      with:
+        url: https://github.com/xyzroe/ZigStarGW-FW/releases/latest/download/ZigStarGW_v0.5.9.full.bin
+        file_in_repo: files/Firmware/ZigStarGW_v0.5.9.full.bin
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
