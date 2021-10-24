@@ -25,7 +25,7 @@ jobs:
         url: https://github.com/xyzroe/ZigStarGW-MT/releases/latest/download/ZigStarGW-MT.app.zip
         file_in_repo: files/Tools/ZigStarGW-MT.app.zip
     - name: Update exec file
-      id: update_app_file
+      id: update_exec_file
       uses: TheLastProject/keep-remote-file-locally-up-to-date-action@v1
       with:
         url: https://github.com/xyzroe/ZigStarGW-MT/releases/latest/download/ZigStarGW-MT.exec.zip
