@@ -10,13 +10,13 @@ jobs:
       id: update_x64exe_file
       uses: TheLastProject/keep-remote-file-locally-up-to-date-action@v1
       with:
-        url: https://github.com/xyzroe/ZigStarGW-MT/releases/latest/ZigStarGW-MT-x64.exe.zip
+        url: https://github.com/xyzroe/ZigStarGW-MT/releases/latest/download/ZigStarGW-MT-x64.exe.zip
         file_in_repo: files/Tools/ZigStarGW-MT-x64.exe.zip
     - name: Update x32.exe file
       id: update_x32exe_file
       uses: TheLastProject/keep-remote-file-locally-up-to-date-action@v1
       with:
-        url: https://github.com/xyzroe/ZigStarGW-MT/releases/latest/ZigStarGW-MT-x32.exe.zip
+        url: https://github.com/xyzroe/ZigStarGW-MT/releases/latest/download/ZigStarGW-MT-x32.exe.zip
         file_in_repo: files/Tools/ZigStarGW-MT-x32.exe.zip
     - name: Update app file
       id: update_app_file
