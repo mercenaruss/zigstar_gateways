@@ -13,14 +13,14 @@ sudo apt update && sudo apt install -y sed
 echo
 echo "Disabling system console"
 STR='console=serial0,115200'
-sudo sed -i .bak "/$STR/d" "cmnline.txt"
+sudo sed -i .bak "/$STR/d" "/boot/cmdline.txt"
 sudo systemctl disable hciuart
 
 
 echo
 echo "Disabling BT & Wi-Fi"
 sudo sh -c "echo 'dtoverlay=disable-bt' >> /boot/config.txt"
-sudo sh -c "echo 'dtoverlay=disable-wifi' >> /boot/config.txt"
+#sudo sh -c "echo 'dtoverlay=disable-wifi' >> /boot/config.txt"
 
 
 echo
@@ -38,5 +38,8 @@ echo "Enabling RTC"
 sudo echo pcf8563 0x51 > /sys/class/i2c-adapter/i2c-0/new_device
 sudo hwclock -w && sudo hwclock -r
 
-
-sudo rm -- "$0"
+echo
+echo "Reboot to apply settings"
+sleep 5
+sudo reboot
+#sudo rm -- "$0"

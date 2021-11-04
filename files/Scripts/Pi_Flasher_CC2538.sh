@@ -1,13 +1,13 @@
 #!/bin/bash
 
 PORT=/dev/ttyAMA0
-RST_PIN=19
-BSL_PIN=26
+RST_PIN=24
+BSL_PIN=27
 
 curl -s https://raw.githubusercontent.com/mercenaruss/zigstar_gateways/main/files/Scripts/banner.txt > logo.txt && cat logo.txt && rm logo.txt
 
 
-echo "Running Pi_Flasher script"
+echo "Running Pi_Flasher_CC2538 script"
 sleep 3
 if [ $1 ]; then
   PORT=$1
@@ -57,14 +57,14 @@ fi
 echo out > /sys/class/gpio/gpio$RST_PIN/direction
 
 echo
-echo "Enable BSL mode and restart Zigbee"
+echo "Enable BSL mode and restart ZigBee"
 echo 0 > /sys/class/gpio/gpio$BSL_PIN/value
 echo 0 > /sys/class/gpio/gpio$RST_PIN/value
 echo 1 > /sys/class/gpio/gpio$RST_PIN/value
 
 echo
-echo "Wait 8 seconds before start"
-sleep 8
+echo "Wait 4 seconds before start"
+sleep 4
 
 echo
 echo "Disable BSL mode"
@@ -75,7 +75,7 @@ echo "Flashing"
 python3 cc2538-bsl/cc2538-bsl.py -p $PORT -ewv $hexfile
 
 echo
-echo "Restart Zigbee"
+echo "Restart ZigBee"
 echo 0 > /sys/class/gpio/gpio$RST_PIN/value
 echo 1 > /sys/class/gpio/gpio$RST_PIN/value
 
@@ -84,4 +84,4 @@ echo "Deleting all files"
 rm -rf cc2538-bsl
 rm -rf zigbee-firmware
 rm $hexfile
-rm -- "$0"
+#rm -- "$0"
