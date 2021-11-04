@@ -18,7 +18,7 @@ echo
 echo -e "${CYAN}Disabling system console${NC}"
 echo
 STR='console=serial0,115200'
-sudo sed -i.bak "s/\$STR/\d" "/boot/cmdline.txt"
+sudo sed -i.bak 's/console=serial0,115200 //' boot/cmdline.txt
 sudo systemctl disable hciuart
 
 
