@@ -19,7 +19,6 @@ apt install -y git unzip openocd pigpio
 echo
 echo "Cloning firmware and OpenOCD config"
 rm -rf zigbee-firmware
-curl https://raw.githubusercontent.com/mercenaruss/zigstar_gateways/main/files/Scripts/zigihat.cfg --output /usr/share/openocd/scripts/board/zigihat.cfg
 git clone https://github.com/jethome-ru/zigbee-firmware.git
 
 echo
@@ -29,6 +28,8 @@ unzip -o $archive -d .
 hexfile=$(ls -1 *.hex | head -1)
 echo $hexfile
 
+echo
+echo "Wait 4 seconds before start"
 sleep 4
 
 echo

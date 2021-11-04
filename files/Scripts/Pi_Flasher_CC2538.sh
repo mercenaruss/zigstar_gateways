@@ -84,4 +84,4 @@ echo "Deleting all files"
 rm -rf cc2538-bsl
 rm -rf zigbee-firmware
 rm $hexfile
-#rm -- "$0"
+rm -- "$0"
