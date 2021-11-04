@@ -1,16 +1,28 @@
 #!/bin/bash
 
+PORT=/dev/ttyAMA0
 RST_PIN=24
+BSL_PIN=27
 
 curl -s https://raw.githubusercontent.com/mercenaruss/zigstar_gateways/main/files/Scripts/banner.txt > logo.txt && cat logo.txt && rm logo.txt
 
-echo "Running Pi_Flasher_JTAG script"
-sleep 1
 
+echo "Running Pi_Flasher_CC2538 script"
+sleep 3
 if [ $1 ]; then
-  RST_PIN=$1
+  PORT=$1
+fi
+echo "Flash port set to $PORT"
+
+if [ $2 ]; then
+  RST_PIN=$2
 fi
 echo "RST pin set to $RST_PIN"
+
+if [ $3 ]; then
+  BSL_PIN=$3
+fi
+echo "BSL pin set to $BSL_PIN"
 
 echo
 echo "Installing dependencies"
@@ -27,6 +39,18 @@ archive=$(ls -1 zigbee-firmware/ti/coordinator/cc2652/*.zip | sort -r | head -1)
 unzip -o $archive -d .
 hexfile=$(ls -1 *.hex | head -1)
 echo $hexfile
+
+echo
+echo "Enable BSL and RST pins"
+if [ ! -e /sys/class/gpio/gpio$BSL_PIN ]; then
+    echo $BSL_PIN > /sys/class/gpio/export
+fi
+echo out > /sys/class/gpio/gpio$BSL_PIN/direction
+
+if [ ! -e /sys/class/gpio/gpio$RST_PIN ]; then
+    echo $RST_PIN > /sys/class/gpio/export
+fi
+echo out > /sys/class/gpio/gpio$RST_PIN/direction
 
 echo
 echo "Wait 4 seconds before start"
