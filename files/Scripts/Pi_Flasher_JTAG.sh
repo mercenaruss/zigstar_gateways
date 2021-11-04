@@ -17,9 +17,9 @@ echo "Installing dependencies"
 apt install -y git unzip openocd pigpio
 
 echo
-echo "Cloning flash tool and firmware"
+echo "Cloning firmware and OpenOCD config"
 rm -rf zigbee-firmware
-#curl https://raw.githubusercontent.com/mercenaruss/zigstar-docs/main/openocd.cfg?token=ABKAYIRBSVXXLAUAKMG2IVLBQPMBC --output /usr/share/openocd/scripts/board/zigihat.cfg
+curl https://raw.githubusercontent.com/mercenaruss/zigstar_gateways/main/files/Scripts/zigihat.cfg --output /usr/share/openocd/scripts/board/zigihat.cfg
 git clone https://github.com/jethome-ru/zigbee-firmware.git
 
 echo
@@ -29,13 +29,12 @@ unzip -o $archive -d .
 hexfile=$(ls -1 *.hex | head -1)
 echo $hexfile
 
-sleep 2
+sleep 4
 
 echo
 echo "Flashing"
-#openocd -f interface/raspberrypi2-native.cfg -f target/ti_cc26x2.cfg -c "transport select jtag" -c "adapter speed 1000"  -c "program $hexfile verify reset exit"
-#openocd -f usr/share/openocd/scripts/board/zigihat.cfg
-sudo openocd -f board/zigihat.cfg
+openocd -f interface/raspberrypi2-native.cfg -f target/ti_cc26x2.cfg -c "transport select jtag" -c "adapter speed 1000"  -c "program $hexfile verify reset exit"
+#sudo openocd -f board/zigihat.cfg
 
 sleep 2
 
@@ -47,5 +46,5 @@ echo 1 > /sys/class/gpio/gpio$RST_PIN/value
 echo
 echo "Deleting all files"
 rm -rf zigbee-firmware
-#rm $hexfile
-#rm -- "$0"
+rm $hexfile
+rm -- "$0"
