@@ -26,7 +26,7 @@ echo "BSL pin set to $BSL_PIN"
 
 echo
 echo "Installing dependencies"
-apt install -y git unzip python3 python3-pip
+apt install -y git unzip python3 python3-pip pigpio
 pip3 install pyserial intelhex
 
 

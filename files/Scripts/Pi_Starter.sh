@@ -11,7 +11,7 @@ sleep 3
 echo
 echo -e "${CYAN}Installing sed${NC}"
 echo
-sudo apt update && sudo apt install -y sed
+sudo apt update && sudo apt install -y sed pigpio
 
 
 echo
@@ -69,6 +69,6 @@ echo
 echo -e "${CYAN}You are ready to use ZigiHAT${NC}"
 echo
 echo -e "${RED}Reboot in 10 seconds to apply settings${NC}"
+sudo rm -- "$0"
 sleep 10
 sudo reboot
-sudo rm -- "$0"
