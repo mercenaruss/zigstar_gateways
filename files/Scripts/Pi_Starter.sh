@@ -65,7 +65,6 @@ echo -e "${CYAN}RTC read current time${NC}"
 echo
 sudo hwclock -r
 echo
-echo
 echo -e "${CYAN}You are ready to use ZigiHAT${NC}"
 echo
 echo -e "${RED}Reboot in 10 seconds to apply settings${NC}"
