@@ -1,7 +1,8 @@
 # ZigStar Gateways -  [ZIG-STAR.COM](https://zig-star.com)
-Information and documentation on ZigStar gateways is available on [website](zig-star.com) 
-Pre-assembed hardware devices can be purchased from [https://zig-star.com](https://zig-star.com) and
+Information and documentation on ZigStar gateways is available on [website](zig-star.com)<br /> 
+Pre-assembed hardware devices can be purchased from [https://zig-star.com](https://zig-star.com) and<br />
 <a href="https://www.tindie.com/stores/zigstar/?ref=offsite_badges&utm_source=sellers_mercenaruss&utm_medium=badges&utm_campaign=badge_small"><img src="https://d2ss6ovg47m0r5.cloudfront.net/badges/tindie-smalls.png" alt="I sell on Tindie" width="200" height="55"></a>
+
 ZigStar Zigbee Gateways have next features:
 -   It's using CC2652P TI chip from TI, the most powerful (+20dB)
 -   **2 WORKING MODES:** LAN Coordinator or USB Coordinator/Router
@@ -20,12 +21,12 @@ ZigStar Zigbee Gateways have next features:
 | <img src="https://community-assets.home-assistant.io/original/3X/a/0/a0a9472919b0d0fc6983f2c0da78a20ae86f112a.png" alt="usb-stick" width="200"/>     	| ZigStar Stick v4    	| CC2652P2                           	| USB          	|
 ## Development
 
-<b> -Have in mind any improvement? Let me know [HERE](https://zig-star.com/about/#contact) </b>
+<b> -Have in mind any improvement? Let me know [HERE](https://zig-star.com/about/#contact)<br />
 For all documentation,description and instructions visit: [ZIG-STAR.COM](https://zig-star.com)
 
 ## Contact
 
-For general enquiries, suggestions and errors spotted: 
+For general enquiries, suggestions and errors spotted:<br /> 
 Email me at support@zig-star.com or write me directly in [Telegram](https://t.me/mercenaruss).
 
 ### License
