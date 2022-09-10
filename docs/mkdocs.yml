@@ -1,0 +1,139 @@
+site_name: ZigStar
+site_author: ZigStar
+site_url: https://zig-star.com/
+site_description: ZigStar DIY Projects
+repo_url: https://github.com/mercenaruss/zigstar_gateways
+repo_name: ZigStar
+edit_uri: "?query=root/docs/docs"
+copyright: Copyright &copy; 2022 ZigStar
+
+# Configuration
+theme:
+  name: material
+  custom_dir: material
+  static_templates:
+    - 404.html
+  include_search_page: false
+  search_index_only: true
+  language: en
+  features:
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.prune
+    - navigation.indexes
+    - navigation.top
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.integrate
+    - header.autohide
+    - content.tabs.link
+    - announce.dismiss
+    - content.tooltips
+  palette:
+    primary: cyan
+    accent: cyan
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: images/zigstar-black.png
+  logo: images/zigstar-white.png
+  icon:
+    logo: logo
+
+extra_javascript:
+    - https://unpkg.com/swiper/swiper-bundle.min.js
+    - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
+    - assets/javascripts/tables.js
+    - assets/javascripts/swiper.js
+    
+extra_css:
+    - https://unpkg.com/swiper/swiper-bundle.min.css
+    - assets/stylesheets/zigstar.css
+    - assets/stylesheets/404.css
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - abbr
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: mercenaruss
+      repo: zigbee-stick-v4
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid-experimental
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/mercenaruss
+    - icon: fontawesome/solid/paper-plane
+      link: https://t.me/zig_starting
+  analytics:
+    provider: google
+    property: UA-108649321-5
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >- # 
+            Thanks for your feedback! Help us improve this page by
+            sending an email to support@zig-star.com
+  consent:
+    title: Cookie consent
+    actions: 
+      - accept
+      - reject
+      - manage
+    description: > 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.Check our privacy policy.
+
+nav:
+    - Home: index.md
+    - Instructions:
+        - Quick Start: radio-docs/quick-start.md
+        - Flash ZigBee: 
+            - ZigStar Multi Tool: radio-docs/zigstar-multi-tool.md
+            - Flashing with cc2538-bsl: radio-docs/flash-cc-bsl.md
+            - Flashing with Smart RF: radio-docs/flash-ti-flash-prog.md
+        - Flash ESP-32: 
+            - ZigStar Firmware: radio-docs/flash-zigstargw.md
+            - ESPHOME Firmware: radio-docs/esp-home.md
+        - Config Z2M/ZHA: radio-docs/z2m-zha.md
