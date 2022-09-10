@@ -7,6 +7,6 @@
 1. Open terminal
 2. pip install mkdocs-material
 
-To run: mkdocs server
+To run: mkdocs serve
 
 
