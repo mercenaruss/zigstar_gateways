@@ -93,6 +93,17 @@ markdown_extensions:
 plugins:
   - search:
       separator: '[\s\u200b\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - social:
+      cards: !ENV [CARDS, false]
+  - git-revision-date-localized:
+      enabled: !ENV [CI, false]
+      enable_creation_date: true
+      type: timeago
+      exclude:
+        - blog/archive/*
+        - blog/category/*
+  - minify:
+      minify_html: !ENV [CI, false]
 
 extra:
   social:
