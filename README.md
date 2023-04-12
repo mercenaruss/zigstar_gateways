@@ -1,4 +1,4 @@
-# ZigStar Gateways
+# ZigStar Zigbee Gateways
 Information and documentation on ZigStar gateways is available on [Website](https://zig-star.com) <br/> 
 Pre-assembed hardware devices can be purchased from [https://zig-star.com](https://zig-star.com) and<br />
 <a href="https://www.tindie.com/stores/zigstar/?ref=offsite_badges&utm_source=sellers_mercenaruss&utm_medium=badges&utm_campaign=badge_small"><img src="https://d2ss6ovg47m0r5.cloudfront.net/badges/tindie-smalls.png" alt="I sell on Tindie" width="200" height="55"></a>
