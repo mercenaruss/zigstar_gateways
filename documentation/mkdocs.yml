@@ -4,7 +4,7 @@ site_url: https://zig-star.com/
 site_description: ZigStar DIY Projects
 repo_url: https://github.com/mercenaruss/zigstar_gateways
 repo_name: zigstar_gateways
-edit_uri: "edit/main/documentation/docs"
+edit_uri: "edit/main/documentation/docs/"
 copyright: Copyright &copy; 2019-2023 ZigStar
 theme:
   name: material
