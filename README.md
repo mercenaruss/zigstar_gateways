@@ -17,8 +17,15 @@ ZigStar Zigbee Gateways have next features:
 | Picture                                                                                                                                              	| Device              	| Description                        	| Working Mode 	|
 |------------------------------------------------------------------------------------------------------------------------------------------------------	|---------------------	|------------------------------------	|--------------	|
 | <img src="https://community-assets.home-assistant.io/original/3X/3/a/3ab437daac64d8deae80f2be16e9c2052c23a0b6.png" alt="lan-gateway" width="200"/>  	| [ZigStar LAN Gateway](https://zig-star.com/projects/zigbee-gw-lan/) 	| CC2652P2 & WT32-ETH01 ESP32 Module 	| USB/LAN      	|
-| <img src="https://community-assets.home-assistant.io/original/4X/b/0/c/b0c2125b108cb665414bcb774b29c121dab30a70.png" alt="poe-gateway" width="200"/> 	| [ZigStar LilyZig PoE](https://zig-star.com/projects/zigstar-lilyzig/) 	| CC2652P2 & TTGO T-Internet-POE     	| USB/LAN/POE  	|
+| <img src="https://community-assets.home-assistant.io/original/4X/e/4/e/e4eda73347dcb0366c0542efe3a7a3a268963b0c.png" alt="poe-gateway" width="200"/> 	| [ZigStar OliZig PoE](https://zig-star.com/projects/zigstar-olizig/) 	| CC2652P2 & Olimex ESP32-PoE    	| USB/LAN/POE  	|
 | <img src="https://community-assets.home-assistant.io/original/3X/a/0/a0a9472919b0d0fc6983f2c0da78a20ae86f112a.png" alt="usb-stick" width="200"/>     	| [ZigStar Stick v4](https://zig-star.com/projects/zigbee-stick-v4/)    	| CC2652P2                           	| USB          	|
+
+
+## Retired devices
+| Picture                                                                                                                                              	| Device              	| Description                        	| Working Mode 	|
+|------------------------------------------------------------------------------------------------------------------------------------------------------	|---------------------	|------------------------------------	|--------------	|
+| <img src="https://community-assets.home-assistant.io/original/4X/b/0/c/b0c2125b108cb665414bcb774b29c121dab30a70.png" alt="poe-gateway" width="200"/> 	| [ZigStar LilyZig PoE](https://zig-star.com/projects/zigstar-lilyzig/) 	| CC2652P2 & TTGO T-Internet-POE     	| USB/LAN/POE  	|
+
 ## Development
 
 <b> Have in mind any improvement? Let me know [HERE](https://zig-star.com/about/#contact)<br />
