@@ -1,0 +1,145 @@
+site_name: ZigStar
+site_author: ZigStar
+site_url: https://zig-star.com/
+site_description: ZigStar DIY Projects
+repo_url: https://github.com/mercenaruss/zigstar_gateways
+repo_name: zigstar_gateways
+edit_uri: "edit/main/documentation/"
+copyright: Copyright &copy; 2019-2023 ZigStar
+theme:
+  name: material
+  custom_dir: overrides
+  static_templates:
+    - 404.html
+  language: en
+  features:
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.prune
+    - navigation.indexes
+    - navigation.path
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - search.share
+    - header.autohide
+    - announce.dismiss
+    - content.tabs.link
+    - content.code.select
+    - content.code.copy
+    - content.tooltips
+    - content.action.edit
+    - content.action.view
+  palette:
+    primary: cyan
+    accent: cyan
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: ../assets/images/zigstar-black.png
+  logo: ../assets/images/zigstar-white.png
+  icon:
+    logo: logo
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - tables
+  - pymdownx.highlight:
+      anchor_linenums: true
+      use_pygments: true
+      pygments_lang_class: true
+      anchor_linenums: true
+      line_spans: __span
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji 
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: mercenaruss
+      repo: zigstar_test
+  - pymdownx.smartsymbols
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: true
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\u200b\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - social:
+      cards: !ENV [CARDS, false]
+  - git-revision-date-localized:
+      enabled: !ENV [CI, false]
+      enable_creation_date: true
+      type: timeago
+      exclude:
+        - blog/archive/*
+        - blog/category/*
+  - minify:
+      minify_html: !ENV [CI, false]
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/mercenaruss
+    - icon: fontawesome/solid/paper-plane
+      link: https://t.me/zig_starting
+
+extra_javascript:
+    - https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js
+    - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
+    - assets/javascripts/tables.js
+    - assets/javascripts/swiper.js
+
+extra_css:
+    - https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css
+    - assets/stylesheets/zigstar.css
+    - assets/stylesheets/404.css
+
+# Page tree
+nav:
+    - Home: index.md
+    - Projects:
+        - LAN Gateway: projects/zigbee-gw-lan.md
+        - Olizig POE: projects/zigstar-olizig.md
+        - Stick v4: projects/zigbee-stick-v4.md
+        - ZigiHAT POE: projects/zigbee-zigihat.md
+        - RPI Shield: projects/zigbee-shield.md
+        - LilyZig POE: projects/zigstar-lilyzig.md
+    - Instructions:
+        - Quick Start: radio-docs/quick-start.md
+        - Flash ZigBee: 
+            - ZigStar Multi Tool: radio-docs/zigstar-multi-tool.md
+            - Flashing with cc2538-bsl: radio-docs/flash-cc-bsl.md
+            - Flashing with Smart RF: radio-docs/flash-ti-flash-prog.md
+        - Flash ESP-32: 
+            - LAN GW Flashing: radio-docs/flash-zigstargw.md
+            - ESPHOME Firmware: radio-docs/esp-home.md
+        - Config Z2M/ZHA: radio-docs/z2m-zha.md
