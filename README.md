@@ -1,5 +1,5 @@
-# ZigStar Gateways -  [ZIG-STAR.COM](https://zig-star.com)
-Information and documentation on ZigStar gateways is available on [website](https://zig-star.com) <br/> 
+# ZigStar Gateways
+Information and documentation on ZigStar gateways is available on [Website](https://zig-star.com) <br/> 
 Pre-assembed hardware devices can be purchased from [https://zig-star.com](https://zig-star.com) and<br />
 <a href="https://www.tindie.com/stores/zigstar/?ref=offsite_badges&utm_source=sellers_mercenaruss&utm_medium=badges&utm_campaign=badge_small"><img src="https://d2ss6ovg47m0r5.cloudfront.net/badges/tindie-smalls.png" alt="I sell on Tindie" width="200" height="55"></a>
 
@@ -23,6 +23,7 @@ ZigStar Zigbee Gateways have next features:
 
 <b> Have in mind any improvement? Let me know [HERE](https://zig-star.com/about/#contact)<br />
 For all documentation,description and instructions visit: [ZIG-STAR.COM](https://zig-star.com)
+In case you want to help us improve documentation please check documentation subfolder.
 
 ## Contact
 
