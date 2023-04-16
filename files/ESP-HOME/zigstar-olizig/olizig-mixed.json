@@ -1,0 +1,14 @@
+{
+  "name": "ZS Gateway - Mixed",
+  "funding_url": "https://zig-star.com/about/",
+  "new_install_prompt_erase": true,
+  "new_install_improv_wait_time": 0,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "olizig-mixed-factory.bin", "offset": 0 },
+      ]
+    }
+  ]
+}
