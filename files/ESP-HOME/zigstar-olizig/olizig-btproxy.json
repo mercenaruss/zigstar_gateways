@@ -7,7 +7,7 @@
     {
       "chipFamily": "ESP32",
       "parts": [
-        { "path": "olizig-btproxy-factory.bin", "offset": 0 },
+        { "path": "olizig-btproxy-factory.bin", "offset": 0 }
       ]
     }
   ]
