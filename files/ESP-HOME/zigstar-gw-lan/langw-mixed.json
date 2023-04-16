@@ -7,7 +7,7 @@
     {
       "chipFamily": "ESP32",
       "parts": [
-        { "path": "langw-mixed-factory.bin", "offset": 0 },
+        { "path": "langw-mixed-factory.bin", "offset": 0 }
       ]
     }
   ]
