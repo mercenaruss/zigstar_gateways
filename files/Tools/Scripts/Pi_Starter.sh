@@ -17,6 +17,7 @@ echo
 echo -e "${CYAN}Disabling system console${NC}"
 echo
 sudo sed -i 's/console=serial0,115200 //' /boot/cmdline.txt
+sudo sed -i 's/console=serial0,115200 //' /boot/firmware/cmdline.txt
 sudo systemctl disable hciuart
 echo
 echo -e "${CYAN}Enable UART1${NC}"
