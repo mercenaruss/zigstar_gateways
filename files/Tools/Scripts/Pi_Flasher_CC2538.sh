@@ -91,7 +91,7 @@ sudo echo 1 > /sys/class/gpio/gpio$RST_PIN/value
 
 echo
 echo -e "${RED}Deleting all files${NC}"
-sudo rm -rf cc2538-bsl && sudo rm -rf zigbee-firmware && sudo rm -rf env
+sudo rm -rf cc2538-bsl && sudo rm -rf zigbee-firmware && sudo rm -rf env && sudo rm -rf firmware_*.patch
 rm $hexfile
 rm -- "$0"
 echo
