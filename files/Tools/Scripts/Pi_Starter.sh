@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl -s https://raw.githubusercontent.com/mercenaruss/zigstar_gateways/main/files/Scripts/banner.txt > logo.txt && cat logo.txt && rm logo.txt
+curl -s https://raw.githubusercontent.com/mercenaruss/zigstar_gateways/main/files/Tools/Scripts/banner.txt > logo.txt && cat logo.txt && rm logo.txt
 
 CYAN='\033[1;36m'
 RED='\033[0;31m'
@@ -18,6 +18,10 @@ echo -e "${CYAN}Disabling system console${NC}"
 echo
 sudo sed -i 's/console=serial0,115200 //' /boot/cmdline.txt
 sudo systemctl disable hciuart
+echo
+echo -e "${CYAN}Enable UART1${NC}"
+echo
+sudo sh -c "echo 'enable_uart=1' >> /boot/config.txt"
 
 echo
 echo -e "${CYAN}Disabling BT & Wi-Fi${NC}"
@@ -52,7 +56,8 @@ sudo raspi-config nonint do_i2c 0
 sleep 1
 sudo i2cdetect -y 1
 sleep 1
-sudo echo pcf8563 0x51 > /sys/class/i2c-adapter/i2c-1/new_device
+echo 'pcf8563 0x51' | sudo tee /sys/class/i2c-adapter/i2c-1/new_device
+# sudo echo pcf8563 0x51 > /sys/class/i2c-adapter/i2c-1/new_device
 sleep 2
 echo
 echo -e "${CYAN}RTC write current time${NC}"
@@ -68,14 +73,17 @@ echo
 #Choose to add to init
 read -p "$(echo -e ${RED}"Do you want to enable RTC on boot?(y/n)?"${NC})" choice
 case "$choice" in 
-  y|Y ) echo -e "${GREEN}Yes, RTC is enabled on boot${NC}"; sudo sed -i 's/exit 0//' /etc/rc.local; sudo sh -c "echo 'sudo echo pcf8563 0x51 > /sys/class/i2c-adapter/i2c-1/new_device' >> /etc/rc.local"; sudo sh -c "echo 'sudo hwclock -s' >> /etc/rc.local"; sudo sh -c "echo 'exit 0' >> /etc/rc.local"; sudo sh -c "echo 'echo RTC Clock is enabled' >> /home/pi/.bashrc"; sudo sh -c "echo 'sudo hwclock -r' >> /home/pi/.bashrc";;
+  y|Y ) echo -e "${GREEN}Yes, RTC is enabled on boot${NC}"; sudo sed -i 's/exit 0//' /etc/rc.local; sudo sh -c "echo 'sudo echo pcf8563 0x51 > /sys/class/i2c-adapter/i2c-1/new_device' >> /etc/rc.local"; sudo sh -c "echo 'sudo hwclock -s' >> /etc/rc.local"; sudo sh -c "echo 'exit 0' >> /etc/rc.local";;
   n|N ) echo -e "${RED}No, you will active manually${NC}";;
   * ) echo "invalid";;
 esac
 echo
 echo -e "${CYAN}You are ready to use ZigiHAT${NC}"
 echo
-echo -e "${RED}Reboot in 10 seconds to apply settings${NC}"
+read -p "$(echo -e ${RED}"Do you want to reboot?(y/n)?"${NC})" choice
+case "$choice" in 
+  y|Y ) echo -e "${GREEN}Reboot in 10 sec${NC}"; sleep 10; sudo reboot;;
+  n|N ) echo -e "${RED}No, you will need to reboot manually${NC}";;
+  * ) echo "invalid";;
+esac
 sudo rm -- "$0"
-sleep 10
-sudo reboot

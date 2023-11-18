@@ -4,7 +4,7 @@ PORT=/dev/ttyAMA0
 RST_PIN=24
 BSL_PIN=27
 
-curl -s https://raw.githubusercontent.com/mercenaruss/zigstar_gateways/main/files/Scripts/banner.txt > logo.txt && cat logo.txt && rm logo.txt
+curl -s https://raw.githubusercontent.com/mercenaruss/zigstar_gateways/main/files/Tools/Scripts/banner.txt > logo.txt && cat logo.txt && rm logo.txt
 
 CYAN='\033[1;36m'
 RED='\033[0;31m'
@@ -30,13 +30,17 @@ echo -e "${CYAN}BSL pin set to $BSL_PIN${NC}"
 
 echo
 echo -e "${CYAN}Installing dependencies${NC}"
-apt install -y git unzip python3 python3-pip pigpio
+sudo apt install -y git unzip python3 python3-pip pigpio python3.11-venv
+echo
+echo -e "${CYAN}Activate Python Enviroment${NC}"
+python -m venv env
+source env/bin/activate
 pip3 install pyserial intelhex
 
 
 echo
 echo -e "${CYAN}Cloning flash tool and firmware${NC}"
-rm -rf cc2538-bsl && rm -rf zigbee-firmware
+sudo rm -rf cc2538-bsl && sudo rm -rf zigbee-firmware
 git clone https://github.com/JelmerT/cc2538-bsl.git
 git clone https://github.com/jethome-ru/zigbee-firmware.git
 
@@ -51,41 +55,43 @@ echo $hexfile
 echo
 echo -e "${CYAN}Enable BSL and RST pins${NC}"
 if [ ! -e /sys/class/gpio/gpio$BSL_PIN ]; then
-    echo $BSL_PIN > /sys/class/gpio/export
+    sudo echo $BSL_PIN > /sys/class/gpio/export
 fi
-echo out > /sys/class/gpio/gpio$BSL_PIN/direction
+sudo echo out > /sys/class/gpio/gpio$BSL_PIN/direction
 
 if [ ! -e /sys/class/gpio/gpio$RST_PIN ]; then
-    echo $RST_PIN > /sys/class/gpio/export
+    sudo echo $RST_PIN > /sys/class/gpio/export
 fi
-echo out > /sys/class/gpio/gpio$RST_PIN/direction
+sudo echo out > /sys/class/gpio/gpio$RST_PIN/direction
 
 echo
 echo -e "${CYAN}Enable BSL mode and restart ZigBee${NC}"
-echo 0 > /sys/class/gpio/gpio$BSL_PIN/value
-echo 0 > /sys/class/gpio/gpio$RST_PIN/value
-echo 1 > /sys/class/gpio/gpio$RST_PIN/value
+sudo echo 0 > /sys/class/gpio/gpio$BSL_PIN/value
+sudo echo 0 > /sys/class/gpio/gpio$RST_PIN/value
+sudo echo 1 > /sys/class/gpio/gpio$RST_PIN/value
 
 echo
-echo -e "${CYAN}Wait 4 seconds before start${NC}"
+sudo echo -e "${CYAN}Wait 4 seconds before start${NC}"
 sleep 4
 
 echo
-echo -e "${CYAN}Disable BSL mode${NC}"
-echo 1 > /sys/class/gpio/gpio$BSL_PIN/value
+sudo echo -e "${CYAN}Disable BSL mode${NC}"
+sudo echo 1 > /sys/class/gpio/gpio$BSL_PIN/value
 
 echo
 echo -e "${CYAN}Flashing${NC}"
 python3 cc2538-bsl/cc2538-bsl.py -p $PORT -ewv $hexfile
-
+echo
+echo -e "${CYAN}Deactivate Python Enviroment${NC}"
+deactivate
 echo
 echo -e "${CYAN}Restart ZigBee${NC}"
-echo 0 > /sys/class/gpio/gpio$RST_PIN/value
-echo 1 > /sys/class/gpio/gpio$RST_PIN/value
+sudo echo 0 > /sys/class/gpio/gpio$RST_PIN/value
+sudo echo 1 > /sys/class/gpio/gpio$RST_PIN/value
 
 echo
 echo -e "${RED}Deleting all files${NC}"
-rm -rf cc2538-bsl && rm -rf zigbee-firmware
+sudo rm -rf cc2538-bsl && sudo rm -rf zigbee-firmware && sudo rm -rf env
 rm $hexfile
 rm -- "$0"
 echo
