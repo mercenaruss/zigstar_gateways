@@ -83,8 +83,7 @@ echo -e "${CYAN}You are ready to use ZigiHAT${NC}"
 echo
 read -p "$(echo -e ${RED}"Do you want to reboot?(y/n)?"${NC})" choice
 case "$choice" in 
-  y|Y ) echo -e "${GREEN}Reboot in 10 sec${NC}"; sleep 10; sudo reboot;;
+  y|Y ) echo -e "${GREEN}Reboot in 10 sec${NC}"; sleep 10; sudo rm -- "$0"; sudo reboot;;
   n|N ) echo -e "${RED}No, you will need to reboot manually${NC}";;
   * ) echo "invalid";;
 esac
-sudo rm -- "$0"
