@@ -57,13 +57,15 @@ echo -e "${CYAN}Enable BSL and RST pins${NC}"
 if [ ! -e /sys/class/gpio/gpio$BSL_PIN ]; then
     sudo echo $BSL_PIN > /sys/class/gpio/export
 fi
+sleep 2
 sudo echo out > /sys/class/gpio/gpio$BSL_PIN/direction
-
+sleep 2
 if [ ! -e /sys/class/gpio/gpio$RST_PIN ]; then
     sudo echo $RST_PIN > /sys/class/gpio/export
 fi
+sleep 2
 sudo echo out > /sys/class/gpio/gpio$RST_PIN/direction
-
+sleep 2
 echo
 echo -e "${CYAN}Enable BSL mode and restart ZigBee${NC}"
 sudo echo 0 > /sys/class/gpio/gpio$BSL_PIN/value
