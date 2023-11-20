@@ -1,32 +1,40 @@
 substitutions:
   #Name your Gateway
-  device_name: langw-mixed
+  device_name: uzg01-mixed
   #Home Assistant Name
-  friendly_name: ZS Gateway - Zigbee & BTProxy
+  friendly_name: UZG Gateway - Mixed
   #Secret YAML is used for next data:
   #pi_pw: !secret api_password
   #ota_pw: !secret ota_password
 
 esphome:
   name: "${device_name}"
-  name_add_mac_suffix: true
+  name_add_mac_suffix: false
   project:
-    name: langw.mixed
+    name: ZigStar.UZG01-Mixed
     version: "1.0"
+  on_boot:
+    priority: 600
+    then:
+      - switch.turn_on: zRST_gpio
+      - delay: 15ms
+      - switch.turn_off: zRST_gpio
 
 esp32:
   board: esp32dev
   framework:
-    type: arduino
+    type: esp-idf
+    sdkconfig_options:
+      CONFIG_FREERTOS_UNICORE: y
+      CONFIG_ESP_TASK_WDT_TIMEOUT_S: "10"
 
-#Ethernet connection information
 ethernet:
   type: LAN8720
   mdc_pin: GPIO23
   mdio_pin: GPIO18
-  clk_mode: GPIO0_IN
-  phy_addr: 1
-  power_pin: GPIO16
+  clk_mode: GPIO17_OUT
+  phy_addr: 0
+  power_pin: GPIO05
 
 ## General ESPHome settings
 # Home Assistant API is enabled
@@ -43,10 +51,11 @@ ota:
 web_server:
   port: 80
 
-#ESPHome Bluetooth_proxy settings
 dashboard_import:
-  package_import_url: github://mercenaruss/zigstar_gateways//files/ESP-HOME/zigstar-gw-lan/langw-mixed.yaml@main
+  package_import_url: github://mercenaruss/zigstar_gateways/files/ESP-HOME/zigstar-uzg-01/uzg01-mixed.yaml@main
+  import_full_config: true
 
+# BTProxy
 esp32_ble_tracker:
   scan_parameters:
     interval: 1100ms
@@ -56,89 +65,126 @@ esp32_ble_tracker:
 bluetooth_proxy:
   active: true
 
-#External component Stream Server
-external_components:
-  - source: github://mercenaruss/esphome-stream-server
-
-## Safe Mode
-button:
-- platform: safe_mode
-  name: Safe Mode Boot
-  entity_category: diagnostic
-
+##Uptime generic sensor
+sensor:
+  - platform: uptime
+    id: uptime_s
+    update_interval: 60s
 # Enable HA Time
 time:
   - platform: homeassistant
     id: homeassistant_time
 
-# Extra sensor to keep track of gateway uptime
-text_sensor:
+#External component Stream Server
+external_components:
+  - source: github://tube0013/esphome-stream-server-v2
+
+#CONTROL SETTINGS
+
+## Buttons
+button:
+  - platform: safe_mode
+    name: 3.3.Safe Mode Reboot
+    entity_category: diagnostic
+  ### Zigbee Restart
   - platform: template
-    name: "${friendly_name} Uptime"
-    lambda: |-
-      uint32_t dur = id(uptime_s).state;
-      int dys = 0;
-      int hrs = 0;
-      int mnts = 0;
-      if (dur > 86399) {
-        dys = trunc(dur / 86400);
-        dur = dur - (dys * 86400);
-      }
-      if (dur > 3599) {
-        hrs = trunc(dur / 3600);
-        dur = dur - (hrs * 3600);
-      }
-      if (dur > 59) {
-        mnts = trunc(dur / 60);
-        dur = dur - (mnts * 60);
-      }
-      char buffer[17];
-      sprintf(buffer, "%ud %02uh %02um %02us", dys, hrs, mnts, dur);
-      return {buffer};
-    icon: mdi:clock-start
-    update_interval: 60s
-
-#Uptime
-sensor:
-  - platform: uptime
-    id: uptime_s
-    update_interval: 60s
-
-# Device functions:
-switch:
-  - platform: restart
-    name: "Gateway Restart"
-
-  - platform: gpio
-    pin: 33
-    id: zRST_gpio
-    inverted: yes
-    restore_mode: ALWAYS_OFF
-  - platform: template
-    name: "Zigbee RST"
-    icon: mdi:toggle-switch
+    name: "3.2.Zigbee - Restart"
+    icon: mdi:restart
     id: zRST
-    turn_on_action:
+    on_press:
       - switch.turn_on: zRST_gpio
       - delay: 15ms
       - switch.turn_off: zRST_gpio
-      
+  ### ESP32 Restart
+  - platform: restart
+    name: "3.1.ESP32 - Restart"
+  ### Zigbee Flash Mode
+  - platform: template
+    name: "2.1.Zigbee - Flash Mode"
+    icon: mdi:cellphone-arrow-down
+    on_press:
+      - script.execute: fw_update_mode
+
+##Status of physical button - sensor
+binary_sensor:
+  - platform: gpio
+    name: "4.1.Physical button status"
+    icon: mdi:toggle-switch
+    id: gpio35btn1
+    pin:
+      number: GPIO35
+      mode:
+        input: true
+      inverted: yes
+    on_press:
+      then:
+        - switch.toggle: modeSwitchTemplate
+  ## Socket connection status
+  - platform: stream_server
+    stream_server: s_s
+    name: "4.2.Z2M/ZHA Connected"
+
+## Switches
+switch:
+### CC2652P Restart
+  - platform: gpio
+    pin: 16
+    id: zRST_gpio
+    inverted: yes
+    restore_mode: ALWAYS_OFF
+
+### Zigbee CC2652P to flash mode switch      
   - platform: gpio
     pin: 32
-    name: "Zigbee BSL"
+    name: "Zigbee Flash Mode internal"
     icon: mdi:toggle-switch
     id: zBSL
     inverted: yes
     restore_mode: ALWAYS_OFF
     internal: true
     
+### Mode LAN/USB switch
   - platform: template
-    name: "Firmware Update"
-    icon: mdi:cellphone-arrow-down
+    name: "1.0.UZG-01 MODE SWITCH (LAN|OFF| / USB|ON|)"
+    id: modeSwitchTemplate
     turn_on_action:
-      - script.execute: fw_update_mode
+      - switch.turn_on: gpio12LED1
+      - switch.turn_on: gpio4Select
+      - switch.template.publish:
+          id: modeSwitchTemplate
+          state: ON
     turn_off_action:
-      - switch.toggle: zRST
+      - switch.turn_off: gpio12LED1
+      - switch.turn_off: gpio4Select
+      - switch.template.publish:
+          id: modeSwitchTemplate
+          state: OFF
+
+  - platform: gpio
+    name: "DEVICE MODE SWITCH (LAN|OFF| / USB|ON|)"
+    restore_mode: ALWAYS_OFF
+    icon: mdi:toggle-switch
+    internal: true
+    id: gpio4Select
+    pin:
+      number: GPIO33
+
+### LEDs swithces
+  - platform: gpio
+    name: "2.3.Mode LED (RED)"
+    restore_mode: ALWAYS_OFF
+    icon: mdi:toggle-switch
+    id: gpio12LED1
+    pin:
+      number: GPIO12
+
+  - platform: gpio
+    name: "2.2.Power LED (BLUE)"
+    restore_mode: ALWAYS_ON
+    icon: mdi:toggle-switch
+    id: gpio14LED2
+    pin:
+      number: GPIO14
 
 #Update CC2652 Firmware
 script:
@@ -149,8 +195,8 @@ script:
       - switch.turn_on: zRST_gpio
       - delay: 1s
       - switch.turn_off: zRST_gpio
-      - logger.log: "Delaying ~5 seconds for TI chip to be ready"
-      - delay: 5s
+      - logger.log: "Delaying 4 seconds for TI chip to be ready"
+      - delay: 4s
       - switch.turn_off: zBSL
       - logger.log: "Update with cc2538-bsl tool now!"
       - logger.log: "Usage: cc2538-bsl.py -p socket://ip_or_hostname:6638 -evw firmware.hex"
@@ -158,11 +204,24 @@ script:
 #UART Settings
 uart:
   id: uart_bus
-  rx_pin: GPIO5
-  tx_pin: GPIO17
+  rx_pin: GPIO36
+  tx_pin: GPIO04
   baud_rate: 115200
 
 #Serial Bridge Settings,uncomment #port to change default 6638 TCP port
 stream_server:
   uart_id: uart_bus
+  id: s_s
 #  port: 1234
+
+mdns:
+  services:
+    - service: "_uzg-01"
+      protocol: "_tcp"
+      port: 6638
+      txt:
+        version: 1.0
+        name: UZG-01
+        radio_type: znp
+        baud_rate: 115200
+        data_flow_control: software
