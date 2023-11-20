@@ -9,7 +9,7 @@ substitutions:
 
 esphome:
   name: "${device_name}"
-  name_add_mac_suffix: true
+  name_add_mac_suffix: false
   project:
     name: ZigStar.UZG01-Zigbee
     version: "1.0"
@@ -52,7 +52,8 @@ web_server:
   port: 80
 
 dashboard_import:
-  package_import_url: github://mercenaruss/zigstar_gateways/files/ESP-HOME/zigstar-uzg-01/uzg01-zigbee.yaml
+  package_import_url: github://mercenaruss/zigstar_gateways/files/ESP-HOME/zigstar-uzg-01/uzg01-zigbee.yaml@main
+  import_full_config: true
  
 ##Uptime generic sensor
 sensor:
