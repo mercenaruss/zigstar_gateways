@@ -7,7 +7,7 @@
     {
       "chipFamily": "ESP32",
       "parts": [
-        { "path": "uzg01-mixed-factory.bin", "offset": 0 }
+        { "path": "uzg01-mixed-firmware-factory.bin", "offset": 0 }
       ]
     }
   ]

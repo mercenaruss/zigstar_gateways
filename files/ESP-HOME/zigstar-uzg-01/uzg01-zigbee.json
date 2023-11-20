@@ -7,7 +7,7 @@
     {
       "chipFamily": "ESP32",
       "parts": [
-        { "path": "uzg01-zigbee-factory.bin", "offset": 0 }
+        { "path": "uzg01-zigbee-firmware-factory.bin", "offset": 0 }
       ]
     }
   ]
