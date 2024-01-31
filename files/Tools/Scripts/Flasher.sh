@@ -121,6 +121,6 @@ echo
 echo -e "${RED}Deleting all files${NC}"
 sudo rm -rf cc2538-bsl && sudo rm -rf firmware && sudo rm -rf env && sudo rm -rf firmware_*.patch
 rm $hexfile_t $hexfile_z
-#rm -- "$0"
+rm -- "$0"
 echo
 echo -e "${GREEN}Flashing complete${NC}"
