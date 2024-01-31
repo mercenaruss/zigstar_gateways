@@ -44,6 +44,9 @@ fi
 echo -e "${CYAN}BSL pin for Zigbee is set to $BSL_PIN_Z${NC}"
 
 echo
+echo -e "${CYAN}Clean old filer and directorie${NC}"
+sudo rm -rf cc2538-bsl && sudo rm -rf firmware && sudo rm -rf env && sudo rm -rf firmware_*.patch
+echo
 echo -e "${CYAN}Installing dependencies${NC}"
 sudo apt install -y git gpiod unzip python3 python3-pip python3.9-venv
 echo
@@ -51,10 +54,8 @@ echo -e "${CYAN}Activate Python Enviroment${NC}"
 python3 -m venv env
 source env/bin/activate
 pip3 install pyserial intelhex
-
 echo
 echo -e "${CYAN}Cloning flash tool and firmwares${NC}"
-sudo rm -rf cc2538-bsl && sudo rm -rf firmware && sudo rm -rf env && sudo rm -rf firmware_*.patch
 git clone https://github.com/JelmerT/cc2538-bsl.git
 git clone https://github.com/hoobs-org/firmware.git
 
